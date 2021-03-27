@@ -1,0 +1,52 @@
+﻿@page "/employee"
+@inject HttpClient Http
+@using MyBlazerApp.Shared
+
+<h1>Employee Record</h1>
+
+<p>
+    <a href="/employee/add">Create</a>
+</p>
+@if (empList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Salary</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in empList)
+            {
+                <tr>
+                    <td>@emp.Empno</td>
+                    <td>@emp.Ename</td>
+                    <td>@emp.Eadd</td>
+                    <td>@emp.Esal</td>
+                    <td>
+                        <a href='/employee/edit/@emp.Empno'>Edit</a>  |
+                        <a href='/employee/delete/@emp.Empno'>Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    EmployeeDto[] empList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        empList = await Http.GetFromJsonAsync<EmployeeDto[]>("/api/Employee/Index");
+    }
+}

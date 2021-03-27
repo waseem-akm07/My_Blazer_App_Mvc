@@ -1,0 +1,9 @@
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\bin\Debug\netstandard2.1\MyBlazerApp.Shared.deps.json
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\bin\Debug\netstandard2.1\MyBlazerApp.Shared.dll
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\bin\Debug\netstandard2.1\MyBlazerApp.Shared.pdb
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\obj\Debug\netstandard2.1\MyBlazerApp.Shared.csprojAssemblyReference.cache
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\obj\Debug\netstandard2.1\MyBlazerApp.Shared.csproj.CoreCompileInputs.cache
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\obj\Debug\netstandard2.1\MyBlazerApp.Shared.AssemblyInfoInputs.cache
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\obj\Debug\netstandard2.1\MyBlazerApp.Shared.AssemblyInfo.cs
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\obj\Debug\netstandard2.1\MyBlazerApp.Shared.dll
+E:\Company_Task\MyBlazerApp\MyBlazerApp\Shared\obj\Debug\netstandard2.1\MyBlazerApp.Shared.pdb

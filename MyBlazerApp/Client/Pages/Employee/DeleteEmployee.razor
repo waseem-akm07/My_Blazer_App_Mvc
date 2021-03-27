@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@page "/employee/delete/{id}"
+@inject HttpClient http
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+@using MyBlazerApp.Shared
+
+<h1>Delete</h1>
+<h3>Are you sure you want to delete employee with id : @id</h3>
+<br/>
+
+<div class="row">
+    <table class="table">
+        <tr>
+            <td>Id</td>
+            <td>@emp.Empno</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>@emp.Ename</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>@emp.Eadd</td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td>@emp.Esal</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Delete" @onclick="@(async () => await Delete())" class="btn btn-default" />
+        <input type="submit" value="Cancel" @onclick="@cancel" class="btn" />
+    </div>
+</div>
+@code{
+    [Parameter]
+    public string id { get; set; }
+
+    EmployeeDto emp = new EmployeeDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        emp = await http.GetFromJsonAsync<EmployeeDto>("/api/Employee/Details/" + Convert.ToInt64(id));
+    }
+
+    protected async Task Delete()
+    {
+        await http.DeleteAsync("/api/Employee/Delete/" + Convert.ToInt64(id));
+        navigation.NavigateTo("/employee");
+    }
+
+    void cancel()
+    {
+        navigation.NavigateTo("/employee");
+    }
+}

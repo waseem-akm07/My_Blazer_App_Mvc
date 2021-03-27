@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@page "/employee/edit/{id}"
+@inject HttpClient http
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+@using MyBlazerApp.Shared
+
+<h2>Edit</h2>
+<h4>Employee</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div>
+                <div class="form-group">
+                    <label for="Name" class="control-label">Id</label>
+                    <input for="Name" class="form-control" @bind="@emp.Empno" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Designation" class="control-label">Name</label>
+                    <input for="Designation" class="form-control" @bind="@emp.Ename" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">Address</label>
+                    <input asp-for="Email" class="form-control" @bind="@emp.Eadd" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label">Salary</label>
+                    <input asp-for="Location" class="form-control" @bind="@emp.Esal" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" @onclick="@(async () => await UpdateEmployee())" class="btn btn-default" />
+                    <input type="submit" value="Cancel" @onclick="@cancel" class="btn" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@code{
+
+    [Parameter]
+    public string id { get; set; }
+
+    EmployeeDto emp = new EmployeeDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        emp = await http.GetFromJsonAsync<EmployeeDto>("/api/Employee/Details/" + Convert.ToInt16(id));
+    }
+
+    protected async Task UpdateEmployee()
+    {
+        await http.PutAsJsonAsync("/api/Employee/Edit", emp);
+        navigation.NavigateTo("/employee");
+    }
+
+    void cancel()
+    {
+        navigation.NavigateTo("/employee");
+
+    }
+
+
+}

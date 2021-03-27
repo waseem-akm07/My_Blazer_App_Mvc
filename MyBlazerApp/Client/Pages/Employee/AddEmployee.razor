@@ -1,0 +1,50 @@
+﻿@page "/employee/add"
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+@using MyBlazerApp.Shared
+
+<h1>Create</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="Name" class="control-label">Id</label>
+                <input for="Name" class="form-control" @bind="@emp.Empno" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation" class="control-label">Name</label>
+                <input for="Designation" class="form-control" @bind="@emp.Ename" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Address</label>
+                <input asp-for="Email" class="form-control" @bind="emp.Eadd" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label">Salary</label>
+                <input asp-for="Location" class="form-control" @bind="@emp.Esal" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" @onclick="@(async () => await CreateEmployee())">Save</button>
+                <button class="btn" @onclick="@cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@code {
+    EmployeeDto emp = new EmployeeDto();
+
+    protected async Task CreateEmployee()
+    {
+        await Http.PostAsJsonAsync("/api/Employee/Create", emp);
+        navigation.NavigateTo("/employee");
+    }
+
+    void cancel()
+    {
+        navigation.NavigateTo("/employee");
+    }
+}
